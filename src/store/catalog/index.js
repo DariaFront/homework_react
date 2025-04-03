@@ -24,6 +24,8 @@ class Catalog extends StoreModule {
       'Загружены товары из АПИ',
     );
   }
+
+
 }
 
 export default Catalog;
