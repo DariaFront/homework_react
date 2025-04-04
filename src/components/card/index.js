@@ -38,7 +38,6 @@ function Card({ item, onAdd = () => { } }) {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    onAdd: e => onAdd(item._id),
   };
 
   return (

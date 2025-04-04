@@ -8,16 +8,23 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 
 function Main() {
+
   const store = useStore();
 
   useEffect(() => {
     store.actions.catalog.load();
+    async function fetchItem(_id) {
+      const item = await store.actions.aticle.getItemByCode(_id);
+    }
+
+    fetchItem(select.item._id);
   }, []);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
+    item: state.aticle.item
   }));
 
   const callbacks = {
@@ -25,14 +32,16 @@ function Main() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+
+    goToAticle: useCallback(_id => store.actions.aticle.getItemByCode(_id), [store])
   };
 
   const renders = {
     item: useCallback(
       item => {
-        return <Item item={item} onAdd={callbacks.addToBasket} />;
+        return <Item item={item} onAdd={callbacks.addToBasket} onTitleClick={callbacks.goToAticle} />;
       },
-      [callbacks.addToBasket],
+      [callbacks.addToBasket, callbacks.goToAticle],
     ),
   };
 

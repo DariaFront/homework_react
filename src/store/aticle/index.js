@@ -10,18 +10,22 @@ class Aticle extends StoreModule {
             item: {},
         };
     }
-
-    async getItemByCode(id) {
-        const response = await fetch(`/articles/${id}`);
+    /**
+     * поиск товара в базе данных по коду товара
+     * @param _id Код товара
+     */
+    async getItemByCode(_id) {
+        const response = await fetch(`/api/v1/articles/${_id}`);
         const json = await response.json();
         this.setState(
             {
                 ...this.getState(),
-                item: json.result.item,
+                item: json.result,
             },
             'Загружен товар из АПИ',
         );
     }
+
 }
 
-export default Aticle;
+export default Aticle;  

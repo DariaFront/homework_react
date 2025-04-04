@@ -18,7 +18,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" exact element={<Main />} />
-        <Route path={`/articles/:id`} element={<Aticle />} />
+        <Route path={`/articles/:_id`} element={<Aticle />} />
       </Routes>
       {activeModal === 'basket' && <Basket />}
     </Router>

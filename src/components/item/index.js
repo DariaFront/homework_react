@@ -6,11 +6,12 @@ import Button from '../button';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-function Item({ item, onAdd = () => { } }) {
+function Item({ item, onAdd = () => { }, onTitleClick = () => { } }) {
   const cn = bem('Item');
 
   const callbacks = {
     onAdd: e => onAdd(item._id),
+    onTitleClick: e => onTitleClick(item._id),
   };
 
   return (
@@ -36,6 +37,7 @@ Item.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   onAdd: PropTypes.func,
+  onTitleClick: PropTypes.func,
 };
 
 export default memo(Item);
